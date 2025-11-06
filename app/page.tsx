@@ -1,10 +1,15 @@
 'use client'
 import { useEffect, useRef, useState } from 'react'
 
+import HomeSection from './components/sections/HomeSection'
+import AboutSection from './components/sections/AboutSection'
+import WorksSection from './components/sections/WorksSection'
+import ContactSection from './components/sections/ContactSection'
+
 const SECTIONS = [
-  { id: 'home',    label: 'Home' },
-  { id: 'about',   label: 'About' },
-  { id: 'works',   label: 'Works' },
+  { id: 'home', label: 'Home' },
+  { id: 'about', label: 'About' },
+  { id: 'works', label: 'Works' },
   { id: 'contact', label: 'Contact' },
 ]
 
@@ -83,10 +88,10 @@ export default function HomePage() {
         aria-label="Primary"
       >
         <div className="mx-auto max-w-7xl px-4 h-14 flex items-center justify-between">
-          <button onClick={() => scrollToSection('home')} 
-                  className="text-white/90 font-medium" 
-                  aria-label="Go to Home">
-                  Belmechri Brahim
+          <button onClick={() => scrollToSection('home')}
+            className="text-white/90 font-medium"
+            aria-label="Go to Home">
+            Belmechri Brahim
           </button>
 
           {/* Desktop меню */}
@@ -95,11 +100,10 @@ export default function HomePage() {
               <li key={s.id}>
                 <button
                   onClick={() => scrollToSection(s.id)}
-                  className={`px-3 py-1.5 rounded-full text-sm transition-colors ${
-                    active === s.id
+                  className={`px-3 py-1.5 rounded-full text-sm transition-colors ${active === s.id
                       ? 'bg-white text-black'
                       : 'text-white/80 hover:text-white hover:bg-white/10'
-                  }`}
+                    }`}
                   aria-current={active === s.id ? 'page' : undefined}
                 >
                   {s.label}
@@ -126,9 +130,8 @@ export default function HomePage() {
       {/* FULLSCREEN Mobile Menu */}
       <div
         id="mobile-menu"
-        className={`lg:hidden fixed inset-0 z-[60] transition-opacity duration-300 ${
-          menuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
-        }`}
+        className={`lg:hidden fixed inset-0 z-[60] transition-opacity duration-300 ${menuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+          }`}
         aria-hidden={!menuOpen}
       >
         {/* затемнение */}
@@ -138,9 +141,8 @@ export default function HomePage() {
         />
         {/* контент */}
         <div
-          className={`absolute inset-0 flex flex-col items-center justify-center gap-8 text-3xl font-semibold text-white transition-transform duration-300 ${
-            menuOpen ? 'translate-y-0' : '-translate-y-4'
-          }`}
+          className={`absolute inset-0 flex flex-col items-center justify-center gap-8 text-3xl font-semibold text-white transition-transform duration-300 ${menuOpen ? 'translate-y-0' : '-translate-y-4'
+            }`}
           role="menu"
         >
           {SECTIONS.map((s) => (
@@ -148,9 +150,8 @@ export default function HomePage() {
               key={s.id}
               role="menuitem"
               onClick={() => handleNavClick(s.id)}
-              className={`px-6 py-3 rounded-full ${
-                active === s.id ? 'bg-white text-black' : 'bg-white/10 hover:bg-white/20'
-              }`}
+              className={`px-6 py-3 rounded-full ${active === s.id ? 'bg-white text-black' : 'bg-white/10 hover:bg-white/20'
+                }`}
             >
               {s.label}
             </button>
@@ -173,27 +174,39 @@ export default function HomePage() {
         className="pt-14 flex flex-col lg:flex-row lg:h-screen overflow-y-auto lg:overflow-y-hidden lg:overflow-x-auto snap-none lg:snap-x lg:snap-mandatory motion-reduce:snap-none"
         style={{ scrollBehavior: 'smooth', overscrollBehaviorInline: 'contain' as any }}
       >
-        <Section id="home"    title="Home"    className="bg-neutral-900" />
-        <Section id="about"   title="About"   className="bg-zinc-900" />
-        <Section id="works"   title="Works"   className="bg-stone-900" />
-        <Section id="contact" title="Contact" className="bg-black" />
+        <Section id="home" className="bg-neutral-900"><HomeSection /></Section>
+        <Section id="about" className="bg-zinc-900"><AboutSection /></Section>
+        <Section id="works" className="bg-stone-900"><WorksSection /></Section>
+        <Section id="contact" className="bg-black"><ContactSection /></Section>
       </main>
     </div>
   )
 }
 
-function Section({ id, title, className = '' }: { id: string; title: string; className?: string }) {
+function Section({
+  id,
+  className = '',
+  children,
+}: {
+  id: string
+  className?: string
+  children: React.ReactNode
+}) {
   return (
     <section
       id={id}
       className={`
-        min-h-[calc(100vh-3.5rem)] lg:min-h-full lg:min-w-[100vw]
+        min-h[calc(100vh-3.5rem)] lg:min-h-full lg:min-w-[100vw]
         snap-start flex items-center justify-center p-8 ${className}
       `}
       style={{ scrollSnapStop: 'always' }}
-      aria-label={title}
+      aria-label={id}
     >
-      <h1 className="text-white/95 text-6xl lg:text-8xl font-semibold">{title}</h1>
+      {/* Не даём внутренний скролл, чтобы колесо не «съедалось» */}
+      <div className="max-w-6xl w-full">
+        {children}
+      </div>
     </section>
   )
 }
+
