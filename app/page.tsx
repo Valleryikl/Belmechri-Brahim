@@ -1,7 +1,6 @@
 'use client'
 import { useEffect, useRef, useState } from 'react'
 
-// --- Навигация ---
 const SECTIONS = [
   { id: 'home',    label: 'Home' },
   { id: 'about',   label: 'About' },
@@ -12,6 +11,7 @@ const SECTIONS = [
 export default function HomePage() {
   const containerRef = useRef<HTMLDivElement>(null)
   const [active, setActive] = useState<string>('home')
+  const [menuOpen, setMenuOpen] = useState(false)
 
   // Колёсико мыши по Y -> горизонтальный скролл (только desktop)
   useEffect(() => {
@@ -34,66 +34,72 @@ export default function HomePage() {
   useEffect(() => {
     const el = containerRef.current
     if (!el) return
-
     const sections = Array.from(el.querySelectorAll<HTMLElement>('section[id]'))
-    const isDesktop = window.matchMedia('(min-width:1024px)').matches
-
-    // Область наблюдения: на десктопе ширина экрана = одна секция по X
     const observer = new IntersectionObserver(
       (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActive(entry.target.id)
-          }
-        })
+        entries.forEach((entry) => entry.isIntersecting && setActive(entry.target.id))
       },
-      {
-        root: el,
-        // Берём 60% пересечения для уверенной активации
-        threshold: isDesktop ? 0.6 : 0.6,
-      }
+      { root: el, threshold: 0.6 }
     )
-
     sections.forEach((s) => observer.observe(s))
     return () => observer.disconnect()
   }, [])
 
-  // Скролл к секции по клику в меню
+  // Блокируем скролл фона, когда открыт бургер
+  useEffect(() => {
+    const original = document.body.style.overflow
+    if (menuOpen) document.body.style.overflow = 'hidden'
+    else document.body.style.overflow = original || ''
+    return () => { document.body.style.overflow = original || '' }
+  }, [menuOpen])
+
+  // Закрыть по Esc
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && setMenuOpen(false)
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [])
+
   const scrollToSection = (id: string) => {
     const el = containerRef.current
     if (!el) return
     const target = el.querySelector<HTMLElement>(`#${id}`)
     if (!target) return
-
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    // Горизонтальный контейнер на desktop, вертикальный поток на mobile — оба варианта работают с scrollIntoView
     target.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', inline: 'start', block: 'start' })
+  }
+
+  const handleNavClick = (id: string) => {
+    setMenuOpen(false)
+    // Небольшая задержка, чтобы оверлей успел скрыться на слабых девайсах
+    setTimeout(() => scrollToSection(id), 10)
   }
 
   return (
     <div className="relative">
       {/* Навбар */}
       <nav
-        className="
-          fixed inset-x-0 top-0 z-50
-          bg-black/40 backdrop-blur supports-[backdrop-filter]:bg-black/30
-          border-b border-white/10
-        "
+        className="fixed inset-x-0 top-0 z-50 bg-black/40 backdrop-blur border-b border-white/10"
         aria-label="Primary"
       >
-        <div className="mx-auto max-w-7xl px-4">
-          <ul className="flex items-center gap-4 py-3">
+        <div className="mx-auto max-w-7xl px-4 h-14 flex items-center justify-between">
+          <button onClick={() => scrollToSection('home')} 
+                  className="text-white/90 font-medium" 
+                  aria-label="Go to Home">
+                  Belmechri Brahim
+          </button>
+
+          {/* Desktop меню */}
+          <ul className="hidden lg:flex items-center gap-4">
             {SECTIONS.map((s) => (
               <li key={s.id}>
                 <button
                   onClick={() => scrollToSection(s.id)}
-                  className={`
-                    px-3 py-1.5 rounded-full text-sm
-                    transition-colors
-                    ${active === s.id
+                  className={`px-3 py-1.5 rounded-full text-sm transition-colors ${
+                    active === s.id
                       ? 'bg-white text-black'
-                      : 'text-white/80 hover:text-white hover:bg-white/10'}
-                  `}
+                      : 'text-white/80 hover:text-white hover:bg-white/10'
+                  }`}
                   aria-current={active === s.id ? 'page' : undefined}
                 >
                   {s.label}
@@ -101,25 +107,71 @@ export default function HomePage() {
               </li>
             ))}
           </ul>
+
+          {/* Burger (mobile) */}
+          <button
+            type="button"
+            className="lg:hidden inline-flex items-center justify-center w-10 h-10 rounded-md text-white/90 hover:bg-white/10 focus:outline-none"
+            aria-label="Open menu"
+            aria-expanded={menuOpen}
+            aria-controls="mobile-menu"
+            onClick={() => setMenuOpen(true)}
+          >
+            {/* иконка */}
+            <span className="relative block w-6 h-0.5 bg-white before:content-[''] before:absolute before:-top-2 before:w-6 before:h-0.5 before:bg-white after:content-[''] after:absolute after:top-2 after:w-6 after:h-0.5 after:bg-white" />
+          </button>
         </div>
       </nav>
 
-      {/* Контейнер секций */}
+      {/* FULLSCREEN Mobile Menu */}
+      <div
+        id="mobile-menu"
+        className={`lg:hidden fixed inset-0 z-[60] transition-opacity duration-300 ${
+          menuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+        }`}
+        aria-hidden={!menuOpen}
+      >
+        {/* затемнение */}
+        <div
+          className="absolute inset-0 bg-black/70 backdrop-blur-sm"
+          onClick={() => setMenuOpen(false)}
+        />
+        {/* контент */}
+        <div
+          className={`absolute inset-0 flex flex-col items-center justify-center gap-8 text-3xl font-semibold text-white transition-transform duration-300 ${
+            menuOpen ? 'translate-y-0' : '-translate-y-4'
+          }`}
+          role="menu"
+        >
+          {SECTIONS.map((s) => (
+            <button
+              key={s.id}
+              role="menuitem"
+              onClick={() => handleNavClick(s.id)}
+              className={`px-6 py-3 rounded-full ${
+                active === s.id ? 'bg-white text-black' : 'bg-white/10 hover:bg-white/20'
+              }`}
+            >
+              {s.label}
+            </button>
+          ))}
+
+          {/* Кнопка закрыть */}
+          <button
+            onClick={() => setMenuOpen(false)}
+            className="absolute top-4 right-4 w-10 h-10 rounded-md text-white/90 hover:bg-white/10"
+            aria-label="Close menu"
+          >
+            <span className="relative block w-6 h-0.5 bg-white rotate-45 before:content-[''] before:absolute before:inset-0 before:rotate-90 before:bg-white before:h-0.5" />
+          </button>
+        </div>
+      </div>
+
+      {/* Контент секций */}
       <main
         ref={containerRef}
-        className="
-          pt-14  /* отступ под фиксированный навбар */
-          flex flex-col lg:flex-row lg:h-screen
-          overflow-y-auto lg:overflow-y-hidden lg:overflow-x-auto
-          snap-none lg:snap-x lg:snap-mandatory motion-reduce:snap-none
-        "
-        style={{
-          scrollBehavior: 'smooth',
-          // скрываем горизонтальный скроллбар, но скролл оставляем
-          // дополни в globals.css (см. прошлый шаг)
-          // @ts-ignore
-          overscrollBehaviorInline: 'contain',
-        }}
+        className="pt-14 flex flex-col lg:flex-row lg:h-screen overflow-y-auto lg:overflow-y-hidden lg:overflow-x-auto snap-none lg:snap-x lg:snap-mandatory motion-reduce:snap-none"
+        style={{ scrollBehavior: 'smooth', overscrollBehaviorInline: 'contain' as any }}
       >
         <Section id="home"    title="Home"    className="bg-neutral-900" />
         <Section id="about"   title="About"   className="bg-zinc-900" />
@@ -130,24 +182,13 @@ export default function HomePage() {
   )
 }
 
-function Section({
-  id,
-  title,
-  className = '',
-}: {
-  id: string
-  title: string
-  className?: string
-}) {
+function Section({ id, title, className = '' }: { id: string; title: string; className?: string }) {
   return (
     <section
       id={id}
       className={`
-        min-h-[calc(100vh-3.5rem)]  /* на мобиле учитываем высоту навбара (pt-14) */
-        lg:min-h-full lg:min-w-[100vw]
-        snap-start
-        flex items-center justify-center
-        p-8 ${className}
+        min-h-[calc(100vh-3.5rem)] lg:min-h-full lg:min-w-[100vw]
+        snap-start flex items-center justify-center p-8 ${className}
       `}
       style={{ scrollSnapStop: 'always' }}
       aria-label={title}
