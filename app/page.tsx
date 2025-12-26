@@ -180,10 +180,16 @@ export default function HomePage() {
         <Section id="works" className="bg-stone-900"><WorksSection /></Section>
         <Section id="contact" className="bg-black"><ContactSection /></Section>
       </main>
-      <footer className='fixed bottom-0 z-50 pl-[100px] pb-[25px]'>
-        <a href="">f</a>
-        <a href="">f</a>
-        <a href="">f</a>
+      <footer className='fixed bottom-0 z-50 pl-[100px] pb-[25px] flex gap-[20px]'>
+        <a href="">
+          <img src="icon/insta.png" alt="а" />
+        </a>
+        <a href="">
+          <img src="icon/faceBook.png" alt="" />
+        </a>
+        <a href="">
+          <img src="icon/email.png" alt="" />
+        </a>
         <div className="footer-block"></div>
       </footer>
     </div>
