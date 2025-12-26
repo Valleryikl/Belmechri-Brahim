@@ -84,25 +84,25 @@ export default function HomePage() {
     <div className="relative">
       {/* Навбар */}
       <nav
-        className="fixed inset-x-0 top-0 z-50 bg-black/40 backdrop-blur border-b border-white/10"
+        className="fixed inset-x-0 top-0 z-50 nav-bar"
         aria-label="Primary"
       >
         <div className="mx-auto max-w-7xl px-4 h-14 flex items-center justify-between">
           <button onClick={() => scrollToSection('home')}
-            className="text-white/90 font-medium"
+            className="text-white cursor-pointer logo"
             aria-label="Go to Home">
             Belmechri Brahim
           </button>
 
           {/* Desktop меню */}
-          <ul className="hidden lg:flex items-center gap-4">
+          <ul className="hidden lg:flex items-center gap-[50px]">
             {SECTIONS.map((s) => (
               <li key={s.id}>
                 <button
                   onClick={() => scrollToSection(s.id)}
-                  className={`px-3 py-1.5 rounded-full text-sm transition-colors ${active === s.id
-                      ? 'bg-white text-black'
-                      : 'text-white/80 hover:text-white hover:bg-white/10'
+                  className={`text-[20px] duration-300 ease-out ${active === s.id
+                      ? 'text-white cursor-default font-semibold scale-105'
+                      : 'text-white/70 cursor-pointer hover:text-white hover:scale-105 hover:font-semibold'
                     }`}
                   aria-current={active === s.id ? 'page' : undefined}
                 >
@@ -125,6 +125,7 @@ export default function HomePage() {
             <span className="relative block w-6 h-0.5 bg-white before:content-[''] before:absolute before:-top-2 before:w-6 before:h-0.5 before:bg-white after:content-[''] after:absolute after:top-2 after:w-6 after:h-0.5 after:bg-white" />
           </button>
         </div>
+        <div className="block">hh</div>
       </nav>
 
       {/* FULLSCREEN Mobile Menu */}
@@ -196,14 +197,13 @@ function Section({
     <section
       id={id}
       className={`
-        min-h[calc(100vh-3.5rem)] lg:min-h-full lg:min-w-[100vw]
-        snap-start flex items-center justify-center p-8 ${className}
+        lg:min-h-full lg:min-w-[100vw]
+        snap-start flex ${className}
       `}
       style={{ scrollSnapStop: 'always' }}
       aria-label={id}
     >
-      {/* Не даём внутренний скролл, чтобы колесо не «съедалось» */}
-      <div className="max-w-6xl w-full">
+      <div className="w-full">
         {children}
       </div>
     </section>
