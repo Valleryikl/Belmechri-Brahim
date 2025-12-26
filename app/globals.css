@@ -44,15 +44,23 @@ body {
   font-family: var(--font-poppins);
 }
 
-.block {
+.nav-block,
+.footer-block {
   position: absolute;
   z-index: -10;
   background-color: black;
   width: 110vw;
-  top: -7vh;
   left: -5vw;
   height: 25vh;
   filter: blur(50px);
+}
+
+.nav-block {
+  top: -7vh;
+}
+
+.footer-block {
+  bottom: -8vh;
 }
 
 h1 {

@@ -125,7 +125,7 @@ export default function HomePage() {
             <span className="relative block w-6 h-0.5 bg-white before:content-[''] before:absolute before:-top-2 before:w-6 before:h-0.5 before:bg-white after:content-[''] after:absolute after:top-2 after:w-6 after:h-0.5 after:bg-white" />
           </button>
         </div>
-        <div className="block">hh</div>
+        <div className="nav-block">hh</div>
       </nav>
 
       {/* FULLSCREEN Mobile Menu */}
@@ -180,6 +180,12 @@ export default function HomePage() {
         <Section id="works" className="bg-stone-900"><WorksSection /></Section>
         <Section id="contact" className="bg-black"><ContactSection /></Section>
       </main>
+      <footer className='fixed bottom-0 z-50 pl-[100px] pb-[25px]'>
+        <a href="">f</a>
+        <a href="">f</a>
+        <a href="">f</a>
+        <div className="footer-block"></div>
+      </footer>
     </div>
   )
 }
