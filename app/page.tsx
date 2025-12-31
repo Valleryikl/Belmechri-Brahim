@@ -84,10 +84,10 @@ export default function HomePage() {
     <div className="relative">
       {/* Навбар */}
       <nav
-        className="fixed inset-x-0 top-0 z-50 nav-bar"
+        className="fixed inset-x-0 top-0 z-50 nav-bar flex justify-between w-[90%] mx-auto"
         aria-label="Primary"
       >
-        <div className="mx-auto max-w-7xl px-4 h-14 flex items-center justify-between">
+        <div className="px-4 h-14 flex items-center justify-between w-full">
           <button onClick={() => scrollToSection('home')}
             className="text-white cursor-pointer logo"
             aria-label="Go to Home">
@@ -180,16 +180,16 @@ export default function HomePage() {
         <Section id="works" className="bg-stone-900"><WorksSection /></Section>
         <Section id="contact" className="bg-black"><ContactSection /></Section>
       </main>
-      <footer className='fixed bottom-0 z-50 pl-[100px] pb-[25px] flex gap-[20px]'>
-        <a href="">
-          <img src="icon/insta.png" alt="а" />
+      <footer className='fixed bottom-0 z-50 pb-[25px] ml-[5%]'>
+        <div className="flex w-full gap-[25px]"><a href="">
+          <img src="icon/insta.png" alt="Instagram" />
         </a>
         <a href="">
-          <img src="icon/faceBook.png" alt="" />
+          <img src="icon/faceBook.png" alt="Facebook" />
         </a>
         <a href="">
-          <img src="icon/email.png" alt="" />
-        </a>
+          <img src="icon/email.png" alt="Email" />
+        </a></div>
         <div className="footer-block"></div>
       </footer>
     </div>
