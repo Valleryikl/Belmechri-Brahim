@@ -175,9 +175,9 @@ export default function HomePage() {
         className="pt-14 flex flex-col lg:flex-row lg:h-screen overflow-y-auto lg:overflow-y-hidden lg:overflow-x-auto snap-none lg:snap-x lg:snap-mandatory motion-reduce:snap-none"
         style={{ scrollBehavior: 'smooth', overscrollBehaviorInline: 'contain' as any }}
       >
-        <Section id="home" className="bg-neutral-900"><HomeSection /></Section>
-        <Section id="about" className="bg-zinc-900"><AboutSection /></Section>
-        <Section id="works" className="bg-stone-900"><WorksSection /></Section>
+        <Section id="home" className="bg-black"><HomeSection /></Section>
+        <Section id="about" className="bg-black"><AboutSection /></Section>
+        <Section id="works" className="bg-black"><WorksSection /></Section>
         <Section id="contact" className="bg-black"><ContactSection /></Section>
       </main>
       <footer className='fixed bottom-0 z-50 pb-[25px] ml-[5%]'>
