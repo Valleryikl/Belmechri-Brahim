@@ -28,7 +28,7 @@ body {
 }
 
 * {
-  scrollbar-width: none; /* Firefox */
+  scrollbar-width: none;
 } 
 
 
@@ -97,10 +97,31 @@ h3 {
   font-size: 60px;
 }
 
-.default-section {
-  background-image: url(../public/Home.png);
+.home-section {
+  background-image: url(/Home.png);
   background-repeat: no-repeat;
   background-size: cover;
   height: 100vh;
   width: 100%;
+}
+
+.img-wrapper {
+  position: relative;
+  z-index: 1;
+}
+
+.img-wrapper::before {
+  content: "";
+  position: absolute;
+  top: -30px;
+  left: 30px;
+  width: 400px;
+  height: 100%;
+  border: 2px solid white;
+  z-index: -1;
+}
+
+.img-wrapper img {
+  display: block;
+  max-width: 400px;
 }
