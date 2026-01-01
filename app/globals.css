@@ -49,8 +49,8 @@ body {
   position: absolute;
   z-index: -10;
   background-color: black;
-  width: 110vw;
-  left: -5vw;
+  width: 120vw;
+  left: -15vw;
   height: 25vh;
   filter: blur(50px);
 }
