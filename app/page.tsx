@@ -8,7 +8,7 @@ import ContactSection from './components/sections/ContactSection'
 
 const SECTIONS = [
   { id: 'home', label: 'Home' },
-  { id: 'about', label: 'About' },
+  { id: 'about', label: 'About me' },
   { id: 'works', label: 'Works' },
   { id: 'contact', label: 'Contact' },
 ]
@@ -84,10 +84,10 @@ export default function HomePage() {
     <div className="relative">
       {/* Навбар */}
       <nav
-        className="fixed inset-x-0 top-0 z-50 nav-bar flex justify-between w-[90%] mx-auto"
+        className="fixed inset-x-0 top-0 z-50 nav-bar flex justify-between w-[84%] mx-auto"
         aria-label="Primary"
       >
-        <div className="px-4 h-14 flex items-center justify-between w-full">
+        <div className="h-14 flex items-center justify-between w-full">
           <button onClick={() => scrollToSection('home')}
             className="text-white cursor-pointer logo"
             aria-label="Go to Home">
@@ -180,7 +180,7 @@ export default function HomePage() {
         <Section id="works" className="bg-black"><WorksSection /></Section>
         <Section id="contact" className="bg-black"><ContactSection /></Section>
       </main>
-      <footer className='fixed bottom-0 z-50 pb-[25px] ml-[5%]'>
+      <footer className='fixed bottom-0 z-50 pb-[25px] ml-[8%]'>
         <div className="flex w-full gap-[25px]"><a href="">
           <img src="icon/insta.png" alt="Instagram" />
         </a>

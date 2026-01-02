@@ -74,7 +74,8 @@ h2, h3 {
   font-family: var(--font-poppins);
   font-weight: 400;
   -webkit-text-stroke: 1px rgba(0, 0, 0, 0.70);
-  text-shadow: 5px 2px 5px rgba(255, 255, 255, 0.25);
+  text-shadow: 8px 0 4px rgba(255, 255, 255, 0.40);
+  color: #ffffff;
 }
 
 p {
@@ -108,6 +109,7 @@ h3 {
 .img-wrapper {
   position: relative;
   z-index: 1;
+  z-index: 55;
 }
 
 .img-wrapper::before {
@@ -115,7 +117,7 @@ h3 {
   position: absolute;
   top: -30px;
   left: 30px;
-  width: 400px;
+  width: 500px;
   height: 100%;
   border: 2px solid white;
   z-index: -1;
@@ -123,5 +125,18 @@ h3 {
 
 .img-wrapper img {
   display: block;
-  max-width: 400px;
+  max-width: 500px;
+}
+
+.about-section h2 {
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.about-section p {
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.70);
+  line-height: 26px;
+  letter-spacing: 1.7px;
+  font-size: 16px;
 }
