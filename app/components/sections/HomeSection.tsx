@@ -1,6 +1,6 @@
 export default function HomeSection() {
   return (
-    <section className="home-section bg-bottom home pt-[27vh] pl-[7vw]">
+    <section className="home-section bg-bottom home pt-[27vh] pl-[10%]">
       <h1 className="flex flex-col leading-none mb-[20px]">Professional
         <span className="pl-[58px]">Photographer</span>
       </h1>
