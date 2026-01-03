@@ -1,8 +1,8 @@
 export default function WorksSection() {
   return (
-    <div>
+    <section className="mx-[8%] pt-[100px] relative z-51 works-section">
       <h3>Works</h3>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
         <WorkCard />
         <WorkCard />
         <WorkCard />
@@ -10,7 +10,7 @@ export default function WorksSection() {
         <WorkCard />
         <WorkCard />
       </div>
-    </div>
+    </section>
   )
 }
 
