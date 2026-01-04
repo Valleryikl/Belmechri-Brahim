@@ -12,6 +12,12 @@
   --font-mono: var(--font-geist-mono);
 }
 
+@media (min-width: 1024px) {
+  html, body {
+    height: 100%;
+    overflow: hidden; /* Запрещаем скролл самого окна на десктопе */
+  }
+} 
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
