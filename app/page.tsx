@@ -65,14 +65,30 @@ export default function HomePage() {
     return () => window.removeEventListener('keydown', onKey)
   }, [])
 
+  // const scrollToSection = (id: string) => {
+  //   const el = containerRef.current
+  //   if (!el) return
+  //   const target = el.querySelector<HTMLElement>(`#${id}`)
+  //   if (!target) return
+  //   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  //   target.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', inline: 'start', block: 'start' })
+  // } 
+
   const scrollToSection = (id: string) => {
-    const el = containerRef.current
-    if (!el) return
-    const target = el.querySelector<HTMLElement>(`#${id}`)
-    if (!target) return
-    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    target.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', inline: 'start', block: 'start' })
-  }
+  const el = containerRef.current
+  if (!el) return
+  const target = el.querySelector<HTMLElement>(`#${id}`)
+  if (!target) return
+
+  const isDesktop = window.matchMedia('(min-width:1024px)').matches
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+  target.scrollIntoView({
+    behavior: reduced ? 'auto' : 'smooth',
+    inline: isDesktop ? 'start' : 'nearest',
+    block: isDesktop ? 'nearest' : 'start',
+  })
+}
 
   const handleNavClick = (id: string) => {
     setMenuOpen(false)
@@ -161,7 +177,7 @@ export default function HomePage() {
           {/* Кнопка закрыть */}
           <button
             onClick={() => setMenuOpen(false)}
-            className="absolute top-4 right-4 w-10 h-10 rounded-md text-white/90 hover:bg-white/10"
+            className="absolute top-4 right-4 w-10 h-10 rounded-md text-white hover:bg-white/10"
             aria-label="Close menu"
           >
             <span className="relative block w-6 h-0.5 bg-white rotate-45 before:content-[''] before:absolute before:inset-0 before:rotate-90 before:bg-white before:h-0.5" />
