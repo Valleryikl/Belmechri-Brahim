@@ -91,8 +91,7 @@ export default function HomePage() {
 }
 
   const handleNavClick = (id: string) => {
-    setMenuOpen(false)
-    // Небольшая задержка, чтобы оверлей успел скрыться на слабых девайсах
+    setMenuOpen(false) 
     setTimeout(() => scrollToSection(id), 10)
   }
 
@@ -197,15 +196,17 @@ export default function HomePage() {
         <Section id="contact" className="bg-black"><ContactSection /></Section>
       </main>
       <footer className='fixed bottom-0 z-50 pb-[25px] ml-[8%]'>
-        <div className="flex w-full gap-[25px]"><a href="">
-          <img src="icon/insta.png" alt="Instagram" />
-        </a>
-        <a href="">
-          <img src="icon/faceBook.png" alt="Facebook" />
-        </a>
-        <a href="">
-          <img src="icon/email.png" alt="Email" />
-        </a></div>
+        <div className="flex w-full gap-[25px] z-55">
+          <a href="">
+            <img src="icon/insta.png" alt="Instagram" />
+          </a>
+          <a href="">
+            <img src="icon/faceBook.png" alt="Facebook" />
+          </a>
+          <a href="">
+            <img src="icon/email.png" alt="Email" />
+          </a>
+        </div>
         <div className="footer-block"></div>
       </footer>
     </div>
