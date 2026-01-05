@@ -1,14 +1,14 @@
 export default function WorksSection() {
   return (
-    <section className="mx-[8%] pt-[100px] relative z-51 works-section">
+    <section className="mx-[8%] pt-[20px] relative z-51 works-section">
       <h3>Works</h3>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
-        <WorkCard />
-        <WorkCard />
-        <WorkCard />
-        <WorkCard />
-        <WorkCard />
-        <WorkCard />
+        <WorkCard img="./img/work1.png" />
+        <WorkCard img="./img/work2.png" />
+        <WorkCard img="./img/work3.png" />
+        <WorkCard img="./img/work4.png" />
+        <WorkCard img="./img/work5.png" />
+        <WorkCard img="./img/work6.png" />
       </div>
     </section>
   )
@@ -17,8 +17,14 @@ export default function WorksSection() {
 type CardProps = { img?: string; }
 function WorkCard({ img }: CardProps) {
   return (
-    <div className="bg-white/5 p-5">
-      <div className="aspect-video rounded-xl bg-black/30 mb-4" />
+    <div className="bg-white/5 overflow-hidden w-[370px] h-[250px] group">
+      <div 
+        className="w-full h-full bg-cover bg-center bg-no-repeat 
+                   transition-transform duration-500 group-hover:scale-110"
+        style={{ 
+          backgroundImage: img ? `url(${img})` : 'none' 
+        }}>
+          </div>
     </div>
   )
 }
