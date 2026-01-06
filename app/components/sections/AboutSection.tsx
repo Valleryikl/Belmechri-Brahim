@@ -1,6 +1,6 @@
 export default function AboutSection() {
   return (
-    <section className="about-section flex justify-between mx-[8%] h-full items-center mt-[96зч]">
+    <section className="about-section flex justify-between mx-[8%] h-full items-center">
       <div className="img-wrapper">
         <img src="img/photographer.png" alt="Photographer with binoculars" />
       </div>
