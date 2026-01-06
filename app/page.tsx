@@ -109,7 +109,6 @@ export default function HomePage() {
             Belmechri Brahim
           </button>
 
-          {/* Desktop меню */}
           <ul className="hidden lg:flex items-center gap-[50px]">
             {SECTIONS.map((s) => (
               <li key={s.id}>
@@ -127,7 +126,6 @@ export default function HomePage() {
             ))}
           </ul>
 
-          {/* Burger (mobile) */}
           <button
             type="button"
             className="lg:hidden inline-flex items-center justify-center w-10 h-10 rounded-md text-white/90 hover:bg-white/10 focus:outline-none"

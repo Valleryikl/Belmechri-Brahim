@@ -69,6 +69,14 @@ body {
   bottom: -8vh;
 }
 
+footer a {
+  transition: all .3s ease-in;
+}
+footer a:hover {
+  transition: scale .3s ease-in-out;
+  transform: scale(1.2);
+}
+
 h1 {
   font-family: var(--font-poppinsItalic);
   font-weight: 400;
