@@ -35,13 +35,9 @@ export default function ContactSection() {
       
       <form onSubmit={onSubmit}>
         <input className='pl-[5px] border-b-2' type="text" name="name" placeholder="Name" required />
-        
         <input className='pl-[5px] border-b-2' type="email" name="email" placeholder="Email" required />
-        
         <input type="hidden" name="subject" value="New request from your website" />
-        
         <textarea className='border-2 p-[5px]' name="message" required placeholder="Text..."></textarea>
-
         <button className='backdrop-blur-[5px] border w-[200px] py-[3px] text-[17px] font-semibold
                           hover:scale-[1.1] duration-300 ease-out hover:cursor-pointer' type="submit">
           Send
