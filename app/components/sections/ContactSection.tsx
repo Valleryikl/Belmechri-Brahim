@@ -30,18 +30,14 @@ export default function ContactSection() {
   };
 
   return (
-    <section className='relative z-55' id="contact">
+    <section className='relative z-55 flex flex-col items-center pt-[50px] gap-[30px]' id="contact">
       <h2>Contact</h2>
       
-      <form onSubmit={onSubmit}>
-        <input className='pl-[5px] border-b-2' type="text" name="name" placeholder="Name" required />
-        
-        <input className='pl-[5px] border-b-2' type="email" name="email" placeholder="Email" required />
-        
+      <form className='py-[45px] px-[85px] bg-[#ffffff15] backdrop-blur w-[65%] flex flex-col gap-[30px] items-center' onSubmit={onSubmit}>
+        <input className='pl-[5px] border-b-2 w-full text-[18px]' type="text" name="name" placeholder="Name" required />
+        <input className='pl-[5px] border-b-2 w-full text-[18px]' type="email" name="email" placeholder="Email" required />
         <input type="hidden" name="subject" value="New request from your website" />
-        
-        <textarea className='border-2 p-[5px]' name="message" required placeholder="Text..."></textarea>
-
+        <textarea className='border-2 p-[5px] w-full h-[100px] text-[18px]' name="message" required placeholder="Text..."></textarea>
         <button className='backdrop-blur-[5px] border w-[200px] py-[3px] text-[17px] font-semibold
                           hover:scale-[1.1] duration-300 ease-out hover:cursor-pointer' type="submit">
           Send
