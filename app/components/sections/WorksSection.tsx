@@ -1,6 +1,6 @@
 export default function WorksSection() {
   return (
-    <section className="mx-[8%] pt-[20px] relative z-51 works-section">
+    <section id="works" className="mx-[8%] pt-[20px] relative z-51 works-section">
       <h3>Works</h3>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
         <WorkCard img="./img/work1.png" />
